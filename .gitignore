@@ -10,6 +10,11 @@
 # DocumentLayout files
 *DocumentLayout*
 # Build results
+**/DesignTimeBuild/
+**/FileContentIndex/
+
+# Configuration files (if you want to ignore them)
+**/config/applicationhost.config
 
 [Dd]ebug/
 [Rr]elease/

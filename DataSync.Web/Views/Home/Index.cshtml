@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Ürün Fiyat Analizi";
+}
+
+<div class="container mt-5">
+    <div class="card card-hb">
+        <div class="card-body">
+            <div class="text-center">
+                <h1 class="display-4 text-hb mb-3">
+                    <i class="bi bi-cart-check"></i> Satıcı Fiyat Karşılaştırma
+                </h1>
+                <p class="lead mb-2">Aşağıdaki ürün için satıcı fiyatlarını getirir:</p>
+                <p class="mb-4">
+                    <a href="https://www.hepsiburada.com/mamajoo-damlatmaz-egitici-kulplu-bardak-160-ml-powder-green-1-adet-p-HBCV00000UY1HP" 
+                       target="_blank" 
+                       class="text-hb fw-semibold text-decoration-none">
+                        Mamajoo Damlatmaz Eğitici Kulplu Bardak 160 ml Powder Green
+                    </a>
+                </p>
+                
+                <button id="btnFetch" class="btn btn-hb btn-lg my-3 px-5">
+                    <span id="spinner" class="spinner-border spinner-border-sm spinner-border-hb me-2" role="status" aria-hidden="true" style="display:none;"></span>
+                    Fiyatları Getir
+                </button>
+
+                <div id="alertContainer" class="mt-3"></div>
+            </div>
+
+            <div class="table-responsive mt-4">
+                <table class="table table-hover table-hb" id="sellersTable" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center"># Sıra</th>
+                            <th scope="col">Satıcı Adı</th>
+                            <th scope="col" class="text-end">Fiyat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Veriler buraya eklenecek -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnFetch').click(function () {
+                var $btn = $(this);
+                var $spinner = $('#spinner');
+                var $table = $('#sellersTable');
+                var $tbody = $table.find('tbody');
+                var $alert = $('#alertContainer');
+
+                // Reset UI
+                $alert.empty();
+                $tbody.empty();
+                $table.hide();
+                $btn.prop('disabled', true);
+                $spinner.show();
+
+                var apiUrl = "http://localhost:5293/api/sellers";
+
+                $.ajax({
+                    url: apiUrl,
+                    method: 'GET',
+                    success: function (data) {
+                        if (data && data.length > 0) {
+                            $.each(data, function (index, item) {
+                                var row = `<tr>
+                                    <td class="text-center"><strong>${item.sortOrder}</strong></td>
+                                    <td class="fw-semibold">${item.name} ${index === 0 ? '<span class="badge badge-hb ms-2">En Ucuz</span>' : ''}</td>
+                                    <td class="text-end fw-bold text-success">${formatCurrency(item.price)}</td>
+                                </tr>`;
+                                $tbody.append(row);
+                            });
+                            $table.fadeIn();
+                        } else {
+                            showAlert('warning', 'Hiçbir satıcı bilgisi bulunamadı.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                        showAlert('danger', 'Veriler çekilirken bir hata oluştu. API çalışıyor mu?');
+                    },
+                    complete: function () {
+                        $btn.prop('disabled', false);
+                        $spinner.hide();
+                    }
+                });
+            });
+
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(value);
+            }
+
+            function showAlert(type, message) {
+                var alertHtml = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`;
+                $('#alertContainer').html(alertHtml);
+            }
+        });
+    </script>
+}

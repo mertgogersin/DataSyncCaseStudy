@@ -1,1 +1,4 @@
-<Solution />
+<Solution>
+  <Project Path="DataSync.Api/DataSync.Api.csproj" />
+  <Project Path="DataSync.Web/DataSync.Web.csproj" />
+</Solution>
