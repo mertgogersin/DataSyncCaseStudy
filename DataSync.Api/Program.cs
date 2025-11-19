@@ -55,6 +55,7 @@ public class ScraperService
         IWebDriver? driver = null;
         try 
         {
+            //Hepsiburada gibi sitelerin anti-bot sistemlerini aşarak, gerçek bir kullanıcı gibi davranıp veri çekebilen bir "görünmez tarayıcı" oluşturma
             var chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument("--headless=new");
             chromeOptions.AddArgument("--no-sandbox");
