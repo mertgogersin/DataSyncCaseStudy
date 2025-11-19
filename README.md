@@ -19,7 +19,7 @@ Bu proje, Hepsiburada'daki bir ürünün farklı satıcılar tarafından satıla
 
 ## 🛠 Kullanılan Teknolojiler
 
-- **.NET 10** - Backend API
+- **.NET 10** - Backend API (Minimal API)
 - **Selenium WebDriver** - Web scraping
 - **ASP.NET Core MVC** - Frontend
 - **Bootstrap 5** - UI tasarımı
