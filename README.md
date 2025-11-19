@@ -19,7 +19,7 @@ Bu proje, Hepsiburada'daki bir ürünün farklı satıcılar tarafından satıla
 
 ## 🛠 Kullanılan Teknolojiler
 
-- **.NET 10** - Backend API (Minimal API)
+- **.NET 10 Minimal API** - Backend API (Tek bir GET endpoint için Minimal API mantıklı ve yeterli olacaktır. Kısaca tek endpoint yöneten bir REST servisidir.)
 - **Selenium WebDriver** - Web scraping
 - **ASP.NET Core MVC** - Frontend
 - **Bootstrap 5** - UI tasarımı
