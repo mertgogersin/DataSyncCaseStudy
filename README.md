@@ -2,7 +2,7 @@
 
 Hepsiburada'dan ürün satıcılarını ve fiyatlarını otomatik olarak çeken web uygulaması.
 
-![Demo](https://via.placeholder.com/800x400/ff6000/ffffff?text=Proje+Demo)
+<img width="1910" height="763" alt="image" src="https://github.com/user-attachments/assets/904d0d36-92b0-4af9-b0b5-f0836fa117e8" />
 
 ## 📝 Proje Hakkında
 
