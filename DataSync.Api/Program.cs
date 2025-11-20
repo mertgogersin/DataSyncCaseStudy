@@ -13,14 +13,18 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddOpenApi();
+// Swagger/OpenAPI desteği (.NET 8 için Swashbuckle)
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddScoped<ScraperService>();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 // Development ortamında HTTPS yönlendirmesi yapma, böylece hem HTTP hem HTTPS çalışır

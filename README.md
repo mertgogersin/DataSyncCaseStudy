@@ -19,7 +19,7 @@ Bu proje, Hepsiburada'daki bir ürünün farklı satıcılar tarafından satıla
 
 ## 🛠 Kullanılan Teknolojiler
 
-- **.NET 10 Minimal API** - Backend API (Tek bir GET endpoint için Minimal API mantıklı ve yeterli olacaktır. Kısaca tek endpoint yöneten bir REST servisidir.)
+- **.NET 8 Minimal API** - Backend API (Tek bir GET endpoint için Minimal API mantıklı ve yeterli olacaktır. Kısaca tek endpoint yöneten bir REST servisidir.)
 - **Selenium WebDriver** - Web scraping
 - **ASP.NET Core MVC** - Frontend
 - **Bootstrap 5** - UI tasarımı
@@ -28,7 +28,7 @@ Bu proje, Hepsiburada'daki bir ürünün farklı satıcılar tarafından satıla
 ## 📦 Kurulum
 
 ### Gereksinimler
-- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (LTS)
 - Chrome tarayıcı
 - **ÖNEMLİ:** NuGet paket yöneticisi artık HTTPS bağlantısı gerektirmektedir. Projenin çalışması için internet bağlantınızın HTTPS protokolünü desteklemesi gerekmektedir.
 
@@ -65,8 +65,12 @@ dotnet run --launch-profile https   # HTTPS için
 
 
 4. **Tarayıcıda açın:**
-- HTTP: `http://localhost:5267`
-- HTTPS: `https://localhost:7172`
+- **Web Uygulaması:**
+  - HTTP: `http://localhost:5267`
+  - HTTPS: `https://localhost:7172`
+- **Swagger API Dokümantasyonu:**
+  - HTTP: `http://localhost:5293/swagger`
+  - HTTPS: `https://localhost:7090/swagger`
 
 ### 🔒 HTTPS/HTTP Protokol Yönetimi
 
