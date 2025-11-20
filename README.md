@@ -30,6 +30,9 @@ Bu proje, Hepsiburada'daki bir ürünün farklı satıcılar tarafından satıla
 ### Gereksinimler
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
 - Chrome tarayıcı
+- **ÖNEMLİ:** NuGet paket yöneticisi artık HTTPS bağlantısı gerektirmektedir. Projenin çalışması için internet bağlantınızın HTTPS protokolünü desteklemesi gerekmektedir.
+
+
 
 ### Projeyi Çalıştırma
 
@@ -40,19 +43,44 @@ cd DataSyncCaseStudy
 ```
 
 2. **API'yi başlatın** (Terminal 1):
-
- "http://localhost:5293"
+```bash
+cd DataSync.Api
+dotnet run --launch-profile http    # HTTP için
+# veya
+dotnet run --launch-profile https   # HTTPS için
+```
+- **HTTP:** http://localhost:5293
+- **HTTPS:** https://localhost:7090
 
 
 3. **Web uygulamasını başlatın** (Terminal 2):
-
- "http://localhost:5267"
+```bash
+cd DataSync.Web
+dotnet run --launch-profile http    # HTTP için
+# veya
+dotnet run --launch-profile https   # HTTPS için
+```
+- **HTTP:** http://localhost:5267
+- **HTTPS:** https://localhost:7172
 
 
 4. **Tarayıcıda açın:**
-```
-http://localhost:5267
-```
+- HTTP: `http://localhost:5267`
+- HTTPS: `https://localhost:7172`
+
+### 🔒 HTTPS/HTTP Protokol Yönetimi
+
+Bu projede protokol uyumluluğu otomatik olarak yönetilir:
+- Web uygulaması **HTTP** ile çalışıyorsa, API'ye **HTTP** ile bağlanır
+- Web uygulaması **HTTPS** ile çalışıyorsa, API'ye **HTTPS** ile bağlanır
+
+**CORS (Cross-Origin Resource Sharing) Yapılandırması:**
+- API'de CORS tüm originlere açıktır (development için)
+- Development ortamında HTTPS yönlendirmesi devre dışı bırakılmıştır
+- Bu sayede hem HTTP hem HTTPS protokolleri sorunsuz çalışır
+
+**Önemli:** Her iki uygulamayı da aynı protokol ile (ikisi de HTTP veya ikisi de HTTPS) çalıştırmanız önerilir. Mixed content (HTTPS'ten HTTP'ye istek) güvenlik nedeniyle tarayıcılar tarafından engellenebilir.
+
 
 ## 💡 Nasıl Çalışır?
 
@@ -99,6 +127,12 @@ Proje, Selenium'u şu şekilde yapılandırır:
 
 **Veri gelmiyor?**
 - Her iki projeyi de çalıştırdığınızdan emin olun
-- API'yi test edin: `http://localhost:5293/api/sellers`
+- API'yi test edin:
+  - HTTP: `http://localhost:5293/api/sellers`
+  - HTTPS: `https://localhost:7090/api/sellers`
 
+**CORS hatası alıyorsanız:**
+- Her iki uygulamayı da aynı protokol ile çalıştırın (ikisi de HTTP veya ikisi de HTTPS)
+- API'nin çalıştığından emin olun
+- Tarayıcı konsolunda hata mesajını kontrol edin
 
