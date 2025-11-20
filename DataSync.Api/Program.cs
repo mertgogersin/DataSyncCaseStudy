@@ -70,10 +70,13 @@ public class ScraperService
 
             driver = new ChromeDriver(chromeOptions);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
 
             // Sayfaya git
             driver.Navigate().GoToUrl(url);
-            Thread.Sleep(500);
+            
+            // Sayfa tam yüklenene kadar bekle (JavaScript içerikleri için)
+            Thread.Sleep(3000);
 
             // "Tümünü Gör" butonunu bul ve tıkla
             try 
@@ -96,7 +99,7 @@ public class ScraperService
                 if (seeAllButton != null) //Tümünü gör butonuna tıklama işlemi
                 {
                     ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", seeAllButton);
-                    Thread.Sleep(200);
+                    Thread.Sleep(500);
                     
                     try 
                     {
@@ -107,16 +110,24 @@ public class ScraperService
                         ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", seeAllButton);
                     }
                     
-                    Thread.Sleep(200);
+                    // Satıcı listesinin tam yüklenmesi için bekle
+                    Thread.Sleep(2000);
                 }
             }
             catch { }
 
             var sellers = new List<SellerInfo>();
             
+            // Elementlerin yüklenmesi için ek bekleme
+            Thread.Sleep(1000);
+            
             // Tüm data-test-id="merchant-name" ve "price-current-price" elementlerini al
             try 
             {
+                // Explicit wait kullanarak merchant elementlerinin yüklenmesini bekle
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+                wait.Until(d => d.FindElements(By.CssSelector("[data-test-id='merchant-name']")).Count > 0);
+                
                 var merchantNameElements = driver.FindElements(By.CssSelector("[data-test-id='merchant-name']"));
                 var priceElements = driver.FindElements(By.CssSelector("[data-test-id='price-current-price']"));
 

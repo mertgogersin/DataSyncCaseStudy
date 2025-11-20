@@ -118,6 +118,17 @@ Proje, Selenium'u şu şekilde yapılandırır:
 - **Headless mod:** Görünmez tarayıcı (arka planda çalışır)
 - **Bot tespitini aşma:** User-Agent ve özel ayarlar
 - **Otomatik bekleme:** Elementler yüklenene kadar bir süre bekler
+- **Implicit Wait:** 10 saniye - Elementleri bulmak için otomatik bekleme
+- **Page Load Timeout:** 30 saniye - Sayfa yükleme için maksimum süre
+- **Explicit Wait:** 5 saniye - Satıcı elementlerinin yüklenmesini bekler
+
+### Bekleme Süreleri
+- Sayfa ilk yüklendikten sonra: **3 saniye** (JavaScript içerikleri için)
+- "Tümünü Gör" butonuna scroll sonrası: **500ms**
+- "Tümünü Gör" butonuna tıklama sonrası: **2 saniye** (satıcı listesi açılması için)
+- Satıcı elementleri aranmadan önce: **1 saniye** (ek güvenlik)
+
+Bu bekleme süreleri, ilk çalıştırmada tüm satıcıların eksiksiz gelmesini sağlar.
 
 ## 🐛 Sorun Giderme
 
@@ -135,4 +146,10 @@ Proje, Selenium'u şu şekilde yapılandırır:
 - Her iki uygulamayı da aynı protokol ile çalıştırın (ikisi de HTTP veya ikisi de HTTPS)
 - API'nin çalıştığından emin olun
 - Tarayıcı konsolunda hata mesajını kontrol edin
+
+**İlk tıklamada sadece birkaç satıcı geliyor, ikinci tıklamada hepsi geliyor?**
+- Bu durum, Hepsiburada'nın JavaScript ile dinamik içerik yüklemesi nedeniyle normaldir
+- Kod güncellemeleri ile bekleme süreleri optimize edildi
+- İlk çalıştırmada ChromeDriver'ın başlatılması daha uzun sürebilir
+- Eğer sorun devam ediyorsa, Program.cs'deki Thread.Sleep sürelerini artırabilirsiniz
 
