@@ -30,7 +30,7 @@ Bu proje, Hepsiburada'daki bir ürünün farklı satıcılar tarafından satıla
 ### Gereksinimler
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (LTS)
 - Chrome tarayıcı
-- **ÖNEMLİ:** NuGet paket yöneticisi artık HTTPS bağlantısı gerektirmektedir. Projenin çalışması için internet bağlantınızın HTTPS protokolünü desteklemesi gerekmektedir.
+
 
 
 
@@ -98,7 +98,7 @@ Bu projede protokol uyumluluğu otomatik olarak yönetilir:
 
 ## 📁 Proje Yapısı
 
-## API Endpoint : /api/sellers
+## API Endpoint GET /api/sellers
 ## 🎯 Örnek API Response
 
 ```json
