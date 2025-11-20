@@ -94,7 +94,7 @@ Bu projede protokol uyumluluğu otomatik olarak yönetilir:
 
 ## 📁 Proje Yapısı
 
-
+## API Endpoint : /api/sellers
 ## 🎯 Örnek API Response
 
 ```json
