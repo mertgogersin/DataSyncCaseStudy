@@ -23,7 +23,12 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+// Development ortamında HTTPS yönlendirmesi yapma, böylece hem HTTP hem HTTPS çalışır
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
 app.UseCors();
 
 app.MapGet("/api/sellers", async (ScraperService scraperService) => 
